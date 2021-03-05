@@ -23,7 +23,7 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:lesson1" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -44,6 +44,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/burnaevsky/java3" />
+      </set>
+    </option>
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -60,6 +67,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunManager" selected="Application.Program (1)">
@@ -118,7 +128,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="lesson1" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -129,8 +139,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="718" y="322" width="911" height="632" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614932358799">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="718" y="322" width="911" height="632" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1614932358799" />
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1614881733485">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -155,9 +170,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614882661532" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1614878106427">
+    <state x="593" y="163" key="SettingsEditor" timestamp="1614931821353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614878106427" />
+    <state x="593" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614931821353" />
   </component>
 </project>

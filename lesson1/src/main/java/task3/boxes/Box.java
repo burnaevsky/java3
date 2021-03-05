@@ -31,6 +31,10 @@ public class Box<T extends Fruit> {
     }
 
     public void pourOverFrom(Box<T> anotherBox){
+        if(anotherBox == this){
+            System.out.println("You can't pour over from this box");
+            return;
+        }
         this.fruits.addAll(anotherBox.fruits);
         anotherBox.fruits.clear();
     }
