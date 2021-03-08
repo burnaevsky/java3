@@ -1,54 +1,82 @@
 package server;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
-public class SimpleAuthServise implements AuthService {
-    private class UserData {
-        String login;
-        String password;
-        String nickname;
+public class DataBaseAuthServise implements AuthService {
 
-        public UserData(String login, String password, String nickname) {
-            this.login = login;
-            this.password = password;
-            this.nickname = nickname;
-        }
-    }
+    private static Connection connection;
+    private static Statement statement;
 
-    private List<UserData> users;
-
-    public SimpleAuthServise() {
-        users = new ArrayList<>();
-        users.add(new UserData("qwe", "qwe", "qwe"));
-        users.add(new UserData("asd", "asd", "asd"));
-        users.add(new UserData("zxc", "zxc", "zxc"));
-
-        for (int i = 1; i < 10; i++) {
-            users.add(new UserData("login" + i, "pass" + i, "nick" + i));
-        }
+    public DataBaseAuthServise() {
     }
 
     @Override
     public String getNicknameByLoginAndPassword(String login, String password) {
-        for (UserData user : users) {
-            if(user.login.equals(login) && user.password.equals(password)){
-                return user.nickname;
+        try {
+            connect();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE login = ?;");
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isClosed()) {
+                System.out.println("empty");
+                return null;
             }
+            if (resultSet.getString("password").equals(password)) {
+                System.out.println("good");
+                return resultSet.getString("nickname");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
         }
-
         return null;
     }
 
     @Override
     public boolean registration(String login, String password, String nickname) {
-        for (UserData user : users) {
-            if(user.login.equals(login) || user.nickname.equals(nickname)){
-                return false;
-            }
-        }
+        try {
+            connect();
+            PreparedStatement preparedStatementSelectLogin = connection.prepareStatement("SELECT * FROM users WHERE (login = ?);");
+            preparedStatementSelectLogin.setString(1, login);
+            ResultSet resultSetLogin = preparedStatementSelectLogin.executeQuery();
 
-        users.add(new UserData(login, password, nickname));
-        return true;
+            /*PreparedStatement preparedStatementSelectNickname = connection.prepareStatement("SELECT * FROM users WHERE (nickname = ?);");
+            preparedStatementSelectNickname.setString(3, nickname);
+            ResultSet resultSetNickname = preparedStatementSelectNickname.executeQuery();*/
+            if (!resultSetLogin.isClosed()) {
+                return false;
+            } else {
+                PreparedStatement preparedStatementInsert = connection.prepareStatement("INSERT INTO users (login, password, nickname) VALUES (?, ?, ?);");
+                preparedStatementInsert.setString(1, login);
+                preparedStatementInsert.setString(2, password);
+                preparedStatementInsert.setString(3, nickname);
+                return preparedStatementInsert.executeUpdate() > 0;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+        return false;
+    }
+
+    private static void connect() throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:main.db");
+        statement = connection.createStatement();
+    }
+
+    private static void disconnect() {
+        try {
+            statement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

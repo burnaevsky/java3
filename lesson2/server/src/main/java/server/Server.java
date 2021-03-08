@@ -25,7 +25,8 @@ public class Server {
 
     public Server() {
         clients = new CopyOnWriteArrayList<>();
-        authService = new SimpleAuthServise();
+        //authService = new SimpleAuthServise();
+        authService = new DataBaseAuthServise();
 
         try {
             server = new ServerSocket(PORT);

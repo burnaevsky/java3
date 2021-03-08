@@ -36,7 +36,6 @@ public class SimpleAuthServise implements AuthService {
                 return user.nickname;
             }
         }
-
         return null;
     }
 
